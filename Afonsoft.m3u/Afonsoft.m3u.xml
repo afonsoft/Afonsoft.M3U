@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Afonsoft.M3U</name>
+    </assembly>
+    <members>
+        <member name="T:Afonsoft.m3u.M3UEntry">
+            <summary>
+            M3UEntry
+            </summary>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UEntry.#ctor(System.TimeSpan,System.String,System.String,System.String,System.String,System.String,System.String,System.Uri)">
+            <summary>
+            M3UEntry
+            </summary>
+            <param name="duration"></param>
+            <param name="title"></param>
+            <param name="logo"></param>
+            <param name="group"></param>
+            <param name="name"></param>
+            <param name="channelId"></param>
+            <param name="epgId"></param>
+            <param name="path"></param>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UEntry.Duration">
+            <summary>
+            Duration
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UEntry.Title">
+            <summary>
+            Title
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UEntry.Group">
+            <summary>
+            Group 
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UEntry.Path">
+            <summary>
+            Path 
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UEntry.Logo">
+            <summary>
+            Logo
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UEntry.ChannelId">
+            <summary>
+            ChannelId
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UEntry.EpgId">
+            <summary>
+            EpgId 
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UEntry.Name">
+            <summary>
+            Name 
+            </summary>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UEntry.Compare(Afonsoft.m3u.M3UEntry,Afonsoft.m3u.M3UEntry)">
+            <summary>
+            Compare
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UEntry.CompareTo(Afonsoft.m3u.M3UEntry)">
+            <summary>
+            CompareTo
+            </summary>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Afonsoft.m3u.M3UException">
+            <summary>
+            M3UException
+            </summary>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UException.#ctor">
+            <summary>
+            M3UException
+            </summary>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UException.#ctor(System.String)">
+            <summary>
+            M3UException
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UException.#ctor(System.String,System.Exception)">
+            <summary>
+            M3UException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:Afonsoft.m3u.M3UFile">
+            <summary>
+            M3UFile
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Site">
+            <summary>
+            Site 
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Phone">
+            <summary>
+            Phone
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Author">
+            <summary>
+            Author 
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Cover">
+            <summary>
+            Cover 
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Description">
+            <summary>
+            Description 
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Logo">
+            <summary>
+            Logo 
+            </summary>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Compare(Afonsoft.m3u.M3UFile,Afonsoft.m3u.M3UFile)">
+            <summary>
+            Compare
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.CompareTo(Afonsoft.m3u.M3UFile)">
+            <summary>
+            CompareTo
+            </summary>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Item(System.Int32)">
+            <summary>
+            Array M3UEntry
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.#ctor(System.String,System.Boolean)">
+            <summary>
+            M3UFile
+            </summary>
+            <param name="fileName"></param>
+            <param name="resolveRelativePaths"></param>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Load(System.String,System.Boolean)">
+            <summary>
+            Load
+            </summary>
+            <param name="fileName"></param>
+            <param name="resolveRelativePaths"></param>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Save(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Save
+            </summary>
+            <param name="fileName"></param>
+            <param name="useAbsolutePaths"></param>
+            <param name="useLocalFilePath"></param>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.GetEnumerator">
+            <summary>
+            GetEnumerator
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Add(Afonsoft.m3u.M3UEntry)">
+            <summary>
+            Add
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Clear">
+            <summary>
+            Clear
+            </summary>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Contains(Afonsoft.m3u.M3UEntry)">
+            <summary>
+            Contains
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.CopyTo(Afonsoft.m3u.M3UEntry[],System.Int32)">
+            <summary>
+            CopyTo
+            </summary>
+            <param name="array"></param>
+            <param name="arrayIndex"></param>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Remove(Afonsoft.m3u.M3UEntry)">
+            <summary>
+            Remove
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.Count">
+            <summary>
+            Count 
+            </summary>
+        </member>
+        <member name="P:Afonsoft.m3u.M3UFile.IsReadOnly">
+            <summary>
+            IsReadOnly 
+            </summary>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Find(System.Predicate{Afonsoft.m3u.M3UEntry})">
+            <summary>
+            Find
+            </summary>
+            <param name="match"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.FindAll(System.Predicate{Afonsoft.m3u.M3UEntry})">
+            <summary>
+            FindAll
+            </summary>
+            <param name="match"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
