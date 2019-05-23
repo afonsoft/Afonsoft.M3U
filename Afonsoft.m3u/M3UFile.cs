@@ -5,7 +5,7 @@ using System.IO;
 using Afonsoft.m3u.Extensions;
 
 namespace Afonsoft.m3u
-{
+{ 
     /// <summary>
     /// M3UFile
     /// </summary>
