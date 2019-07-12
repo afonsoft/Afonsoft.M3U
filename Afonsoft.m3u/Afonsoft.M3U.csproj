@@ -8,16 +8,17 @@
       <PackageProjectUrl>https://github.com/afonsoft/Afonsoft.M3U</PackageProjectUrl>
       <PackageTags>Afonsoft M3U List PlayList</PackageTags>
       <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-      <AssemblyVersion>2019.5.23</AssemblyVersion>
-      <FileVersion>2019.5.23</FileVersion>
+      <AssemblyVersion>2019.7.12</AssemblyVersion>
+      <FileVersion>2019.7.2</FileVersion>
       <SignAssembly>false</SignAssembly>
-      <AssemblyOriginatorKeyFile>afonsoft.M3U.pfx</AssemblyOriginatorKeyFile>
-      <Version>2019.5.23</Version>
+      <Version>2019.7.12</Version>
       <RepositoryUrl>https://github.com/afonsoft/Afonsoft.M3U</RepositoryUrl>
       <RepositoryType>Git</RepositoryType>
       <Description>Afonsoft M3U List PlayList</Description>
       <NeutralLanguage>pt-BR</NeutralLanguage>
       <PackageLicenseUrl></PackageLicenseUrl>
+      <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+      <PackageReleaseNotes>Afonsoft M3U List PlayList</PackageReleaseNotes>
     </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
