@@ -174,11 +174,25 @@
             <param name="fileName"></param>
             <param name="resolveRelativePaths"></param>
         </member>
+        <member name="M:Afonsoft.m3u.M3UFile.#ctor(System.IO.StreamReader)">
+            <summary>
+            M3UFile
+            </summary>
+            <param name="reader"></param>
+        </member>
         <member name="M:Afonsoft.m3u.M3UFile.Load(System.String,System.Boolean)">
             <summary>
             Load
             </summary>
             <param name="fileName"></param>
+            <param name="resolveRelativePaths"></param>
+        </member>
+        <member name="M:Afonsoft.m3u.M3UFile.Load(System.IO.StreamReader,System.Uri,System.Boolean)">
+            <summary>
+            Load
+            </summary>
+            <param name="reader"></param>
+            <param name="workingUri"></param>
             <param name="resolveRelativePaths"></param>
         </member>
         <member name="M:Afonsoft.m3u.M3UFile.Save(System.String,System.Boolean,System.Boolean)">

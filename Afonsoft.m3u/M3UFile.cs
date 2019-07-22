@@ -93,6 +93,14 @@ namespace Afonsoft.m3u
         {
             Load(fileName, resolveRelativePaths);
         }
+        /// <summary>
+        /// M3UFile
+        /// </summary>
+        /// <param name="reader"></param>
+        public M3UFile(StreamReader reader)
+        {
+            Load(reader,new Uri("https://www.afonsoft.com.br"), false);
+        }
 
         /// <summary>
         /// Load
@@ -105,88 +113,99 @@ namespace Afonsoft.m3u
             if (string.IsNullOrEmpty(fileName))
                 throw new M3UException("fime is missing.");
 
+            var workingUri = new Uri(Path.GetDirectoryName(fileName) ?? throw new M3UException("fime is missing."));
             using (var reader = new StreamReader(fileName))
             {
-                var workingUri = new Uri(Path.GetDirectoryName(fileName) ?? throw new M3UException("fime is missing."));
-
-                string line;
-                var lineCount = 0;
-
-                M3UEntry entry = null;
-
-                while ((line = reader.ReadLine()) != null)
-                {
-                    if (lineCount == 0 && !line.StartsWith("#EXTM3U"))
-                        throw new M3UException($"Line {lineCount}: M3U header is missing.");
-
-                    //Recuperar as informações desta lista
-                    if (line.StartsWith("#PLAYLISTV:"))
-                    {
-                        //Remove "#PLAYLISTV:"
-                        var newLine = line.Substring(11, line.Length - 11);
-
-                        Email = GetValue(newLine, "pltv-email");
-                        Site = GetValue(newLine, "pltv-site");
-                        Phone = GetValue(newLine, "pltv-phone");
-                        Author = GetValue(newLine, "pltv-author");
-                        Cover = GetValue(newLine, "pltv-cover");
-                        Description = GetValue(newLine, "pltv-description");
-                        Name = GetValue(newLine, "pltv-name");
-                        Logo = GetValue(newLine, "pltv-logo");
-                    }
-
-                    //Recuperar a lista
-                    if (line.StartsWith("#EXTINF:"))
-                    {
-                        if (entry != null)
-                            throw new M3UException($"Line {lineCount}: Unexpected entry detected.");
-
-                        //Remove "#EXTINF:"
-                        var split = line.Substring(8, line.Length - 8).Split(new[] { ',' }, 2);
-
-                        if (split.Length != 2)
-                            throw new M3UException($"Line {lineCount}: Invalid track information.");
-
-                        var newLine = split[0].Trim();
-                        var time = newLine.IndexOf(' ') != -1 ? newLine.Substring(0, newLine.IndexOf(' ')).Trim() : newLine.Trim();
-
-                        if (!int.TryParse(time, out int seconds))
-                            throw new M3UException($"Line {lineCount}: Invalid track duration.");
-
-                        var title = split[1].Replace(",", "").Trim();
-                        var logo = GetValue(newLine, "tvg-logo").Trim();
-                        var group = GetValue(newLine, "group-title").Trim();
-                        var channelId = GetValue(newLine, "channel-id").Trim();
-                        var epgId = GetValue(newLine, "epg-id").Trim();
-                        var name = GetValue(newLine, "tvg-name").Trim();
-
-                        var duration = TimeSpan.FromSeconds(seconds);
-
-                        if (string.IsNullOrEmpty(name))
-                            name = title;
-
-                        entry = new M3UEntry(duration, title, logo, group, name, channelId, epgId, null);
-                    }
-
-                    else if (entry != null && !line.StartsWith("#")) //ignore comments
-                    {
-                        if (!Uri.TryCreate(line, UriKind.RelativeOrAbsolute, out var path))
-                            throw new M3UException($"Line {lineCount}: Invalid entry path.");
-
-                        if (path.IsFile && resolveRelativePaths)
-                            path = path.MakeAbsoluteUri(workingUri);
-
-                        entry.Path = path;
-
-                        _entries.Add(entry);
-
-                        entry = null;
-                    }
-
-                    lineCount++;
-                }
+                Load(reader, workingUri, resolveRelativePaths);
             }
         }
+
+        /// <summary>
+        /// Load
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="workingUri"></param>
+        /// <param name="resolveRelativePaths"></param>
+        public void Load(StreamReader reader, Uri workingUri, bool resolveRelativePaths = false)
+        {
+            string line;
+            var lineCount = 0;
+
+            M3UEntry entry = null;
+
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (lineCount == 0 && !line.StartsWith("#EXTM3U"))
+                    throw new M3UException($"Line {lineCount}: M3U header is missing.");
+
+                //Recuperar as informações desta lista
+                if (line.StartsWith("#PLAYLISTV:"))
+                {
+                    //Remove "#PLAYLISTV:"
+                    var newLine = line.Substring(11, line.Length - 11);
+
+                    Email = GetValue(newLine, "pltv-email");
+                    Site = GetValue(newLine, "pltv-site");
+                    Phone = GetValue(newLine, "pltv-phone");
+                    Author = GetValue(newLine, "pltv-author");
+                    Cover = GetValue(newLine, "pltv-cover");
+                    Description = GetValue(newLine, "pltv-description");
+                    Name = GetValue(newLine, "pltv-name");
+                    Logo = GetValue(newLine, "pltv-logo");
+                }
+
+                //Recuperar a lista
+                if (line.StartsWith("#EXTINF:"))
+                {
+                    if (entry != null)
+                        throw new M3UException($"Line {lineCount}: Unexpected entry detected.");
+
+                    //Remove "#EXTINF:"
+                    var split = line.Substring(8, line.Length - 8).Split(new[] { ',' }, 2);
+
+                    if (split.Length != 2)
+                        throw new M3UException($"Line {lineCount}: Invalid track information.");
+
+                    var newLine = split[0].Trim();
+                    var time = newLine.IndexOf(' ') != -1 ? newLine.Substring(0, newLine.IndexOf(' ')).Trim() : newLine.Trim();
+
+                    if (!int.TryParse(time, out int seconds))
+                        throw new M3UException($"Line {lineCount}: Invalid track duration.");
+
+                    var title = split[1].Replace(",", "").Trim();
+                    var logo = GetValue(newLine, "tvg-logo").Trim();
+                    var group = GetValue(newLine, "group-title").Trim();
+                    var channelId = GetValue(newLine, "channel-id").Trim();
+                    var epgId = GetValue(newLine, "epg-id").Trim();
+                    var name = GetValue(newLine, "tvg-name").Trim();
+
+                    var duration = TimeSpan.FromSeconds(seconds);
+
+                    if (string.IsNullOrEmpty(name))
+                        name = title;
+
+                    entry = new M3UEntry(duration, title, logo, group, name, channelId, epgId, null);
+                }
+
+                else if (entry != null && !line.StartsWith("#")) //ignore comments
+                {
+                    if (!Uri.TryCreate(line, UriKind.RelativeOrAbsolute, out var path))
+                        throw new M3UException($"Line {lineCount}: Invalid entry path.");
+
+                    if (path.IsFile && resolveRelativePaths)
+                        path = path.MakeAbsoluteUri(workingUri);
+
+                    entry.Path = path;
+
+                    _entries.Add(entry);
+
+                    entry = null;
+                }
+
+                lineCount++;
+            }
+        }
+        
 
         private static string GetValue(string line, string value, string comma = "\"")
         {
